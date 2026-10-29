@@ -1,4 +1,4 @@
-/* 站内 AI 客服 · 懒加载 · 只在点开时初始化模型，不拖慢页面 */
+/* 站内 AI 客服 · 本地 SDK 优先 · 全程兜底不断线 */
 (function(){
   var CFG = {
     endpoint: 'https://ai-advisor-05667.app.workbuddy.host',
@@ -9,44 +9,94 @@
   var PROMPT = "你是一家西安的「企业知识库搭建」服务的接待顾问。你只做一件事：用文字了解对方公司的情况，判断他是否需要把资料、报价、合同、老员工经验，整理成新人能查、能照着做、换人不丢的东西；并在合适时机把人交接到老板本人手上。\n\n【硬规则，任何情况不得违反】\n0. 最高优先级：对方只要问「怎么联系你」「电话多少」「加个微信」，或说「想找人做」「让你们做」「外包」，立即停掉所有提问，直接按第 8 条把联系方式给出去。提问永远让位于给联系方式。\n1. 全程只用文字。绝不承诺、也绝不发送任何文件、链接、图片、截图、方案、案例、清单。对方索要时按第 6 条挡回去。（页面会在你说出那句话时自动弹出微信名片码，你只需说「扫下面这个码」，不要自己描述码的内容）\n2. 一次只问一个问题，问题不超过 25 个字。整条回复不超过 90 个字。不要分点罗列，像人在说话。\n3. 不要客套开场，不要说「您好，很高兴为您服务」这类话。\n4. 前 3 轮不报价。要报价必须先知道两件事：大概多少人用、资料攒了几年。\n5. 报价只给区间：轻量包 1999 元起；标准包 5000 到 50000 元，按规模和年限。不说具体总价。\n6. 对方要资料时这样挡：「资料我先不发。不是藏着——发过去你看着更乱，还占你时间。你就说一个最具体的：上次找一个文件，找了多久？」\n7. 判断急不急，看三个信号：① 有没有时间点；② 是不是已经在动手整理；③ 问的人是不是老板本人。中两个算急。\n8. 给联系方式的三个触发条件，任一命中就立刻给：① 问怎么联系、要电话、要微信；② 说想找人做、让你们做、外包；③ 三个急信号中两个。给的方式：单独一行写「{WX}」，别的字不要加，然后收尾。三个都没命中：请对方留个微信或电话，留下后回「记下了，我上午 10 点前联系你」，就收尾。\n9. 对方明显是同行、推销、或纯闲聊，礼貌收尾一句就停，不纠缠。\n10. 不编造任何案例、客户名、服务过多少家、成交数据。被问到就实话说：具体案例当面聊。\n11. 对方问你是不是机器人、是不是 AI，如实回答：是 AI 先接待，具体的事老板本人接手。\n12. 不承诺工期、不承诺效果、不承诺价格以外的任何条件。不要账号、不要密码、不要身份证。\n13. 遇到你答不上来的问题——具体工期、具体总价、某个行业能不能做、案例细节、要不要上门、能不能签保密协议——统一收口到加微信：「这个我得本人跟你说，你扫下面这个码，我把范围和时间给你讲清楚」。\n\n【你已经知道的背景】\n对方是从搜索引擎搜到本页的，可能来自任何行业。先判断他是哪一类企业，再问具体场景。不要问「有什么可以帮您」。\n\n【参考话术】\n· 开场：你那边资料和合同这些，现在是按项目存，还是各人手里各一份？\n· 追问：最常被找的是哪几个文件？现在散在几个地方？\n· 共鸣：这不是你的问题，是没有唯一口径。同一个东西三个版本，谁都说不清哪个对。\n· 判断标准：新人来了能不能不问人就找到东西；老人走了活接不接得上；同一个东西是不是只有一个版本。三条有一条不行，就值得做。";
   var WX = '';
 
+  /* 兜底文案：任何时候出问题都用这几句，绝不把客户丢在空白里 */
+  var FB_TIMEOUT = '网络有点慢，我这边没接上。你直接加我微信，我看到就回你。';
+  var FB_OFFLINE = '你那边好像断网了。等有信号了，直接加我微信，一样能问。';
+  var FB_ERROR   = '刚才没接上。直接加我微信，比在这里等快。';
+  var FB_ASK     = '想问什么，直接加我微信说，我在。';
+
   var cloud = null, MODEL = '', ready = false, booting = false;
   var CONVO = [];
   var SID = 'site' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-  var body, inpEl;
+  var body, inpEl, qrShown = false, waiters = [];
 
   function el(id){ return document.getElementById(id); }
+  function atBottom(){ if(body) body.scrollTop = body.scrollHeight; }
   function add(cls, txt){
+    if(!body) return null;
     var d = document.createElement('div');
     d.className = 'm ' + cls;
     d.textContent = txt;
     body.appendChild(d);
-    body.scrollTop = body.scrollHeight;
+    atBottom();
     return d;
   }
-  function loadSDK(cb){
-    if(window.WorkBuddyCloud){ cb(); return; }
+  /* 微信码只弹一次，但任何时候都能手动调出来 */
+  function showQR(force){
+    if(!body) return;
+    if(qrShown && !force) return;
+    qrShown = true;
+    var w = document.createElement('div');
+    w.className = 'm ai';
+    w.style.padding = '8px';
+    w.style.textAlign = 'center';
+    w.innerHTML = '<img src="' + WXQR + '" alt="微信二维码" style="width:170px;max-width:100%;border-radius:8px;display:block;margin:0 auto">'
+      + '<div style="font-size:11.5px;color:#8b8b8b;margin-top:6px">长按或截图保存，微信扫一扫' + (WX ? '（或搜 ' + WX + '）' : '') + '</div>';
+    body.appendChild(w);
+    atBottom();
+  }
+  /* 统一出口：先说话，再给码。所有失败路径都走这里 */
+  function bail(txt){
+    add('tip', txt);
+    showQR();
+    var node = add('ai', FB_ASK);
+    return node;
+  }
+
+  function loadScript(src, cb){
     var s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/@tencent-ai/workbuddy-cloud-sdk@dev/lib/index.global.js';
-    s.onload = cb;
-    s.onerror = function(){ cb(new Error('sdk')); };
+    var done = false;
+    var t = setTimeout(function(){
+      if(done) return;
+      done = true;
+      cb(new Error('timeout'));
+    }, 9000);
+    s.onload = function(){ if(done) return; done = true; clearTimeout(t); cb(null); };
+    s.onerror = function(){ if(done) return; done = true; clearTimeout(t); cb(new Error('error')); };
+    s.src = src;
     document.head.appendChild(s);
+  }
+  /* 本地优先，CDN 只作兜底。国内访问 jsDelivr 不稳，这条路必须能自己走 */
+  function loadSDK(cb){
+    if(window.WorkBuddyCloud){ cb(null); return; }
+    loadScript('/assets/wb-cloud.js', function(e1){
+      if(!e1 && window.WorkBuddyCloud){ cb(null); return; }
+      loadScript('https://cdn.jsdelivr.net/npm/@tencent-ai/workbuddy-cloud-sdk@dev/lib/index.global.js', function(e2){
+        if(!e2 && window.WorkBuddyCloud){ cb(null); return; }
+        cb(new Error('sdk'));
+      });
+    });
   }
   function friendly(e){
     var c = (e && e.error && e.error.code) || (e && e.code) || '';
     c = String(c);
-    if(c.indexOf('quota_') === 0) return '现在问的人有点多，你等一分钟再发一次。';
-    if(c.indexOf('auth_') === 0) return '连接出了点问题，刷新一下就能继续。';
-    return '刚才没连上，你再发一次。';
+    if(c.indexOf('quota_') === 0) return '现在问的人有点多，你等一分钟再发一次，或者直接加我微信。';
+    if(c.indexOf('auth_') === 0) return '连接出了点问题，直接加我微信更快。';
+    if(c.indexOf('network') >= 0 || c.indexOf('fetch') >= 0 || c.indexOf('timeout') >= 0) return FB_TIMEOUT;
+    return FB_ERROR;
   }
+
   function init(cb){
     if(ready){ cb(); return; }
-    if(booting){ return; }
+    if(booting){ waiters.push(cb); return; }
     booting = true;
+    waiters.push(cb);
+    if(navigator.onLine === false){ booting = false; waiters = []; bail(FB_OFFLINE); return; }
     loadSDK(function(err){
-      if(err){ booting = false; add('tip', '连接失败，刷新页面再试'); return; }
+      if(err){ booting = false; waiters = []; bail(FB_TIMEOUT); return; }
       try{
         cloud = WorkBuddyCloud.createWorkBuddyCloud(CFG);
-      }catch(e){ booting = false; add('tip', '初始化失败'); return; }
+      }catch(e){ booting = false; waiters = []; bail(FB_ERROR); return; }
       cloud.llm.models.list().then(function(models){
         var PREFER = ['deepseek-v4-flash','glm-5.3-flash','minimax-m3.1-flash','hunyuan-chat','glm-4.6'];
         var m = null;
@@ -54,50 +104,65 @@
           m = (models || []).filter(function(x){ return x.id === PREFER[i] && x.disabled !== true; })[0] || null;
         }
         if(!m){ m = (models || []).filter(function(x){ return x.disabled !== true; })[0] || null; }
-        if(!m){ booting = false; add('tip', '接待暂时不可用，刷新再试'); return; }
-        MODEL = m.id; ready = true; booting = false; cb();
+        if(!m){ booting = false; waiters = []; bail(FB_ERROR); return; }
+        MODEL = m.id; ready = true; booting = false;
+        var q = waiters; waiters = [];
+        q.forEach(function(f){ try{ f(); }catch(e){} });
       }).catch(function(e){
-        booting = false;
-        add('tip', friendly(e));
+        booting = false; waiters = [];
+        bail(friendly(e));
       });
     });
   }
+
   function maybeQR(txt){
     if(txt.indexOf('扫下面这个码') >= 0 || txt.indexOf('扫一下') >= 0 || txt.indexOf('加我') >= 0){
-      var w = document.createElement('div');
-      w.className = 'm ai';
-      w.style.padding = '8px';
-      w.style.textAlign = 'center';
-      w.innerHTML = '<img src="' + WXQR + '" alt="微信码" style="width:170px;max-width:100%;border-radius:8px;display:block;margin:0 auto">'
-        + '<div style="font-size:11.5px;color:#8b8b8b;margin-top:6px">长按或截图保存，微信扫一扫</div>';
-      body.appendChild(w);
-      body.scrollTop = body.scrollHeight;
+      showQR();
     }
   }
+
   async function ask(text){
     var WX_LINE = WX ? ('加我微信：' + WX) : '你扫下面这个码加我，两秒的事';
     var msgs = [{ role: 'system', content: PROMPT.split('{WX}').join(WX_LINE) }]
       .concat(CONVO.map(function(m){ return { role: m.role, content: m.content }; }));
     var full = '';
     var node = add('ai', '…');
+    if(!node) return;
+    /* 25 秒没有任何内容 → 判定断线，立刻给微信，不让三个点一直转 */
+    var stalled = false;
+    var timer = setTimeout(function(){
+      if(full) return;
+      stalled = true;
+      node.textContent = FB_TIMEOUT;
+      showQR();
+    }, 25000);
     try{
       var stream = await cloud.llm.chat.completions.create({
         model: MODEL, messages: msgs, stream: true, temperature: 0.75, conversationId: SID
       });
       for await (var chunk of stream){
+        if(stalled) break;
         var d = chunk && chunk.choices && chunk.choices[0] && chunk.choices[0].delta;
         if(d && d.content){
           full += d.content;
+          clearTimeout(timer);
           node.textContent = full;
-          body.scrollTop = body.scrollHeight;
+          atBottom();
         }
       }
-      if(!full){ node.textContent = '刚才没生成出来，你再发一次。'; return; }
+      clearTimeout(timer);
+      if(stalled) return;
+      if(!full){ node.textContent = FB_ERROR; showQR(); return; }
       CONVO.push({ role: 'assistant', content: full });
       maybeQR(full);
       try{ localStorage.setItem('kb_' + SID, JSON.stringify(CONVO)); }catch(e){}
     }catch(e){
-      node.textContent = friendly(e);
+      clearTimeout(timer);
+      if(stalled) return;
+      var msg = friendly(e);
+      node.textContent = msg;
+      if(msg !== FB_TIMEOUT) showQR();
+      else showQR();
     }
   }
 
@@ -109,11 +174,10 @@
     inpEl = el('kbIn');
     if(body.childNodes.length === 0){
       add('tip', 'AI 先接待，具体的事本人接手');
-      init(function(){
-        ask('（用户刚打开页面，还没有说话。请你按参考话术开场，一句反问即可，不要自我介绍）');
-      });
+      if(navigator.onLine === false){ bail(FB_OFFLINE); }
+      else init(function(){ ask('（用户刚打开页面，还没有说话。请你按参考话术开场，一句反问即可，不要自我介绍）'); });
     }
-    setTimeout(function(){ inpEl.focus(); }, 200);
+    setTimeout(function(){ if(inpEl) inpEl.focus(); }, 200);
   };
   window.kbClose = function(){
     el('kbPanel').classList.remove('on');
@@ -126,6 +190,7 @@
     add('me', t);
     el('kbIn').value = '';
     CONVO.push({ role: 'user', content: t });
+    if(navigator.onLine === false){ bail(FB_OFFLINE); return; }
     if(!ready){
       init(function(){ ask(t); });
     } else {
@@ -137,5 +202,9 @@
       e.preventDefault();
       window.kbSay();
     }
+  });
+  /* 掉线/恢复时给一句提示，恢复后不打断已有对话 */
+  window.addEventListener('offline', function(){
+    if(el('kbPanel') && el('kbPanel').classList.contains('on')) add('tip', '网络断了，好了以后再发一次，或者直接加微信。');
   });
 })();
