@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>图纸和变更单管理：版本控制与闭环两个关键</title>
+<meta name="description" content="工程资料最容易出问题的是图纸版本和变更单闭环。这篇给出命名规则、作废标记、变更四步闭环的做法。">
+<link rel="canonical" href="https://jinyinhua2026.github.io/wenda/tuzhi-biangengdan-guanli.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图纸和变更单管理：版本控制与闭环两个关键">
+<meta property="og:description" content="工程资料最容易出问题的是图纸版本和变更单闭环。这篇给出命名规则、作废标记、变更四步闭环的做法。">
+<meta property="og:url" content="https://jinyinhua2026.github.io/wenda/tuzhi-biangengdan-guanli.html">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "工程项目的图纸和变更单，怎么管才不乱？", "acceptedAnswer": {"@type": "Answer", "text": "两个动作就能解决大半问题：图纸版本号只增不改、旧版进作废目录；变更单必须闭环，从提出到结算引用四步都要有记录。"}}]}</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header><div class="hd">
+  <a href="/" class="logo">企业知识库搭建<span>把老师傅的经验，变成新人能查的东西</span></a>
+  <nav><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/zice.html">30 秒自测</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="kicker">常见问题</div>
+<h1>工程项目的图纸和变更单，怎么管才不乱？</h1>
+<p class="lead">两个动作就能解决大半问题：图纸版本号只增不改、旧版进作废目录；变更单必须闭环，从提出到结算引用四步都要有记录。</p>
+<h2>图纸：版本号只增不改</h2><p>同一张图改一次升一个版本，不允许在原文件上直接改。文件名带版本号和日期，旧版本移进「作废」目录，目录里保留但不参与检索。</p><h2>现场必须用最新版</h2><p>图纸作废要同步到现场，不能只在电脑上标作废。现场留一份受控的最新版清单，每周核对一次。</p><h2>变更单四步闭环</h2><p>提出（谁提、为什么）、审批（谁签、什么时候）、执行（做了没有、做完什么样）、结算引用（这笔钱在哪一版结算里体现）。四步缺一，结算时必被卡。</p><h2>变更与实际不一致怎么办</h2><p>如实记录，不要事后补签。补签的记录在审计时站不住，反而更麻烦。</p>
+
+<h2>常见误区</h2>
+<ul class="wrong"><li>在原文件上直接改，改完不知道哪版是最终版</li><li>变更单签了但没进结算</li><li>只在电脑上标作废，现场还在用旧版</li></ul>
+
+<div class="cta">
+<b>你这边具体是什么情况</b>
+<p>说一句最卡的地方，我直接告诉你能不能做、从哪下手。</p>
+<button onclick="kbOpen()">直接问</button>
+</div>
+
+<div class="rel"><h3>接着看</h3><a href="/wenda/yuangong-lizhi-jiaojie.html">员工离职，工作交接怎么做才不留坑？</a><a href="/">回到首页</a></div>
+
+</div></main>
+<footer><div class="wrap">
+  <b>企业知识库搭建</b> · 西安<br>
+  服务范围：资料与经验整理、标准流程、模板库、索引规范。做成新人能自己查、换人不丢的东西。<br>
+  对话由 AI 先接待，具体的事本人接手。全站不发布任何客户名称与成交数据。
+</div></footer>
+<button id="kbBtn" onclick="kbOpen()"><i></i>问一句</button>
+<div id="kbPanel">
+  <div id="kbHead"><div>直接问，不用加好友<small>AI 先接待 · 具体的事本人接手</small></div><button id="kbClose" onclick="kbClose()">&times;</button></div>
+  <div id="kbBody"></div>
+  <div id="kbFoot"><textarea id="kbIn" placeholder="你那边资料现在是怎么存的？"></textarea><button id="kbSend" onclick="kbSay()">发</button></div>
+</div>
+<script src="/assets/chat.js"></script>
+</body>
+</html>

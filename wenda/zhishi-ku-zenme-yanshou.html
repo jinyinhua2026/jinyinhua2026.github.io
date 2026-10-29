@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>知识库验收的三条硬标准：找人试，不看书</title>
+<meta name="description" content="知识库验收不看文档厚度，看新人能不能自己找到答案。这篇给出三条可当场验证的标准。">
+<link rel="canonical" href="https://jinyinhua2026.github.io/wenda/zhishi-ku-zenme-yanshou.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="知识库验收的三条硬标准：找人试，不看书">
+<meta property="og:description" content="知识库验收不看文档厚度，看新人能不能自己找到答案。这篇给出三条可当场验证的标准。">
+<meta property="og:url" content="https://jinyinhua2026.github.io/wenda/zhishi-ku-zenme-yanshou.html">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "知识库做完怎么验收？有没有客观标准？", "acceptedAnswer": {"@type": "Answer", "text": "验收只做三个测试：新人能不能不问人找到答案、老人走了有没有人能接、同一个东西是不是只有一个版本。三条都过，就是合格。"}}]}</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header><div class="hd">
+  <a href="/" class="logo">企业知识库搭建<span>把老师傅的经验，变成新人能查的东西</span></a>
+  <nav><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/zice.html">30 秒自测</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="kicker">常见问题</div>
+<h1>知识库做完怎么验收？有没有客观标准？</h1>
+<p class="lead">验收只做三个测试：新人能不能不问人找到答案、老人走了有没有人能接、同一个东西是不是只有一个版本。三条都过，就是合格。</p>
+<h2>测试一：新人盲测</h2><p>找一个没参与项目的员工，给他五个真实问题，只允许他查库，不许问人。限时十分钟。答对四个以上算通过。</p><h2>测试二：离职模拟</h2><p>挑一个核心岗位，假设他明天离职，看他的工作能不能被别人接手。接不了的，说明经验没沉下来。</p><h2>测试三：版本唯一性</h2><p>随机抽三样东西（比如报价表、流程说明、模板），在全公司范围找，看有几个版本。超过一个不合格。</p><h2>验收不通过怎么办</h2><p>不要签收后再说。把不通过的项写成清单，要求限期补齐，补齐后再测一次。</p>
+
+<h2>常见误区</h2>
+<ul class="wrong"><li>按文档页数验收</li><li>只看演示，不找人实测</li><li>验收由做的人自己打分</li></ul>
+
+<div class="cta">
+<b>你这边具体是什么情况</b>
+<p>说一句最卡的地方，我直接告诉你能不能做、从哪下手。</p>
+<button onclick="kbOpen()">直接问</button>
+</div>
+
+<div class="rel"><h3>接着看</h3><a href="/wenda/zhishi-ku-zenme-zuo.html">企业知识库到底怎么做？从零开始的步骤是什么？</a><a href="/wenda/zhishi-ku-duoshao-qian.html">做一个企业知识库大概要多少钱？</a><a href="/wenda/zhishi-ku-hui-meiren-yong.html">知识库建好了但没人用，问题出在哪？</a><a href="/">回到首页</a></div>
+
+</div></main>
+<footer><div class="wrap">
+  <b>企业知识库搭建</b> · 西安<br>
+  服务范围：资料与经验整理、标准流程、模板库、索引规范。做成新人能自己查、换人不丢的东西。<br>
+  对话由 AI 先接待，具体的事本人接手。全站不发布任何客户名称与成交数据。
+</div></footer>
+<button id="kbBtn" onclick="kbOpen()"><i></i>问一句</button>
+<div id="kbPanel">
+  <div id="kbHead"><div>直接问，不用加好友<small>AI 先接待 · 具体的事本人接手</small></div><button id="kbClose" onclick="kbClose()">&times;</button></div>
+  <div id="kbBody"></div>
+  <div id="kbFoot"><textarea id="kbIn" placeholder="你那边资料现在是怎么存的？"></textarea><button id="kbSend" onclick="kbSay()">发</button></div>
+</div>
+<script src="/assets/chat.js"></script>
+</body>
+</html>

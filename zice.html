@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>30 秒自测：你的公司需不需要做知识库</title>
+<meta name="description" content="五个问题，判断你的公司资料管理处于什么状态、要不要做知识库。答完直接给结论，不合适会直接说不用做。">
+<link rel="canonical" href="https://jinyinhua2026.github.io/zice.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="30 秒自测：你的公司需不需要做知识库">
+<meta property="og:description" content="五个问题，判断你的公司资料管理处于什么状态、要不要做知识库。答完直接给结论，不合适会直接说不用做。">
+<meta property="og:url" content="https://jinyinhua2026.github.io/zice.html">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header><div class="hd">
+  <a href="/" class="logo">企业知识库搭建<span>把老师傅的经验，变成新人能查的东西</span></a>
+  <nav><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/zice.html">30 秒自测</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="kicker">30 秒自测</div>
+<h1>你的公司需不需要做知识库？</h1>
+<p class="lead">五个问题，答完直接给结论。不合适的我会说不用做。</p>
+<div id="qz"></div>
+<div id="res"></div>
+<div class="cta"><b>想知道具体怎么做</b><p>把你的情况说一句，我告诉你能不能做、从哪下手。</p><button onclick="kbOpen()">直接问</button></div>
+<script>
+var QZ=[
+ ['公司里最常用的资料，找一次平均要花多久？',['几秒钟，路径很熟','一两分钟，翻一下','五分钟以上，或者要问人']],
+ ['同一个文件（比如报价表、流程说明），公司里有几个版本？',['只有一个','两个，说不清哪个对','好几个，各人手里都有']],
+ ['上一次核心员工离职，交接清楚了吗？',['交接清楚','文件交了，但很多事没人接','基本没交接']],
+ ['新人入职，大概多久能独立干活？',['两周内','一个月左右','三个月以上']],
+ ['老师傅或老员工的经验，写下来了吗？',['写了，能查到','零散记了一些','在他脑子里']]
+];
+var ANS=[];
+function draw(){
+  var h='';
+  for(var i=0;i<QZ.length;i++){
+    h+='<div style="background:#fff;border:1px solid #e5e2dc;border-radius:10px;padding:15px 17px;margin-bottom:11px">'
+      +'<b style="display:block;font-size:15.5px;margin-bottom:9px">'+(i+1)+'. '+QZ[i][0]+'</b>';
+    for(var j=0;j<QZ[i][1].length;j++){
+      h+='<label style="display:block;font-size:14.5px;padding:7px 0;cursor:pointer;color:#333">'
+        +'<input type="radio" name="q'+i+'" value="'+j+'" onchange="pick('+i+','+j+')" style="margin-right:7px">'+QZ[i][1][j]+'</label>';
+    }
+    h+='</div>';
+  }
+  document.getElementById('qz').innerHTML=h;
+}
+function pick(i,v){ ANS[i]=v; show(); }
+function show(){
+  if(ANS.filter(function(x){return x!==undefined;}).length<5) return;
+  var s=0; for(var i=0;i<5;i++) s+=ANS[i];
+  var t='',c='#1d3d33';
+  if(s<=1){ t='<b>暂时不需要专门做。</b><br>你现在的状态比多数公司好：找得到、版本清、交接得过去。把命名规则固定下来就行，不用花钱做库。'; c='#2f7d5a'; }
+  else if(s<=4){ t='<b>可以先做一个部门试试。</b><br>问题集中在一两处，不用全公司铺开。挑最常被找的 10 个文件先理一遍，两周就能看出有没有用。'; c='#8a6d3b'; }
+  else if(s<=7){ t='<b>值得做，而且越早越省事。</b><br>你已经有明显的信息断层，主要卡在「版本不唯一」和「经验没落地」。建议先做一个核心部门，把高频的 50 条做出来。'; c='#8a5a2a'; }
+  else { t='<b>确实需要做了，而且风险已经出现。</b><br>找一次五分钟以上、版本好几个、交接过不去，这三条同时成立，说明关键信息已经不在公司手里。建议从最缺人的那个岗位开始。'; c='#8a3a2a'; }
+  document.getElementById('res').innerHTML='<div style="background:#fff;border:1px solid #e5e2dc;border-left:4px solid '+c+';border-radius:0 10px 10px 0;padding:18px 20px;margin:20px 0;font-size:16px;line-height:1.8">'+t+'</div>';
+}
+draw();
+</script>
+
+</div></main>
+<footer><div class="wrap">
+  <b>企业知识库搭建</b> · 西安<br>
+  服务范围：资料与经验整理、标准流程、模板库、索引规范。做成新人能自己查、换人不丢的东西。<br>
+  对话由 AI 先接待，具体的事本人接手。全站不发布任何客户名称与成交数据。
+</div></footer>
+<button id="kbBtn" onclick="kbOpen()"><i></i>问一句</button>
+<div id="kbPanel">
+  <div id="kbHead"><div>直接问，不用加好友<small>AI 先接待 · 具体的事本人接手</small></div><button id="kbClose" onclick="kbClose()">&times;</button></div>
+  <div id="kbBody"></div>
+  <div id="kbFoot"><textarea id="kbIn" placeholder="你那边资料现在是怎么存的？"></textarea><button id="kbSend" onclick="kbSay()">发</button></div>
+</div>
+<script src="/assets/chat.js"></script>
+</body>
+</html>
