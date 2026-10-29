@@ -207,4 +207,10 @@
   window.addEventListener('offline', function(){
     if(el('kbPanel') && el('kbPanel').classList.contains('on')) add('tip', '网络断了，好了以后再发一次，或者直接加微信。');
   });
+  /* 自检钩子：地址带 ?kbtest=1 时自动开窗，方便无人值守健康检查，对正常访客无影响 */
+  if(location.search.indexOf('kbtest=1') >= 0){
+    window.addEventListener('load', function(){
+      setTimeout(function(){ try{ window.kbOpen(); }catch(e){} }, 300);
+    });
+  }
 })();
