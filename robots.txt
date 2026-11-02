@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jinyinhua2026.github.io/sitemap.xml
+Sitemap: https://jinyinhua2026.com.cn/sitemap.xml
