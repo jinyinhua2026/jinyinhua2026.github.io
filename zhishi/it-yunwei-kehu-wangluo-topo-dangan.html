@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>客户网络拓扑只在工程师脑子里，换个人排查从头摸</title>
+<meta name="description" content="客户断网，两个工程师先后到场，第二个人还是从交换机一路问起，修了 4 小时。这篇给一套当天能落地的拓扑档案：画到哪一层、每季度拍哪张照、交接查哪三样，以及把排查从 4 小时压到 40 分钟的具体做法。">
+<link rel="canonical" href="https://jinyinhua2026.com.cn/zhishi/it-yunwei-kehu-wangluo-topo-dangan.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="客户网络拓扑只在工程师脑子里，换个人排查从头摸">
+<meta property="og:description" content="客户断网，两个工程师先后到场，第二个人还是从交换机一路问起，修了 4 小时。这篇给一套当天能落地的拓扑档案：画到哪一层、每季度拍哪张照、交接查哪三样，以及把排查从 4 小时压到 40 分钟的具体做法。">
+<meta property="og:url" content="https://jinyinhua2026.com.cn/zhishi/it-yunwei-kehu-wangluo-topo-dangan.html">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "客户网络拓扑只装在工程师脑子里，换个人去排查要从头摸一遍", "description": "客户断网，两个工程师先后到场，第二个人还是从交换机一路问起，修了 4 小时。这篇给一套当天能落地的拓扑档案：画到哪一层、每季度拍哪张照、交接查哪三样，以及把排查从 4 小时压到 40 分钟的具体做法。", "author": {"@type": "Organization", "name": "企业知识库搭建"}, "publisher": {"@type": "Organization", "name": "企业知识库搭建"}}</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header><div class="hd">
+  <a href="/" class="logo">企业知识库搭建<span>把老师傅的经验，变成新人能查的东西</span></a>
+  <nav><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/zice.html">30 秒自测</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="kicker">实操</div>
+<h1>客户网络拓扑只装在工程师脑子里，换个人去排查要从头摸一遍</h1>
+<p class="lead">一家 30 台电脑的客户断网，两个工程师先后到场，第二个人还是从交换机一路问到机柜，修了 4 小时。不是技术不行，是现场情况只存在上一个人的记忆里。</p>
+<h2>第二个工程师为什么重走一遍</h2><p>上一趟排查的结果没有落成任何可查的东西。人到现场看的是活设备，走的时候什么都没留下：哪个口接哪个区域、核心交换机在第几格、光猫后面串了什么，全在记忆里。客户换个网管、你自己换个人去，等于从零开始。这类客户一年上门六次，六次里至少两次是在重新认识现场。判断标准只有一句：让一个没来过这家的工程师说出三楼财务那台交换机上联在哪，说不出来就是没有档案，不用争论。</p><h2>拓扑只画到端口，不画到每根线</h2><p>每根线都画，三个月就过期，反而误事。只画三层：机柜正面每台设备的位置、每台交换机的端口占用（哪几个口接哪个区域或房间）、出口链路（几条宽带、谁家的、从哪台设备出去）。画到这一层，八成的排查能在电话里完成——让对方看指示灯、拔哪个口试。端口表只留三列：编号、接入区域、备注；别写安装日期，写日期的那张表没人维护，半年后就没人敢信。</p><h2>每季度上门拍一张机柜正面照</h2><p>一张正面照比一张 CAD 图省八成时间：标签、指示灯、跳线颜色、空口位置全在里面。按同一角度、同一距离拍，文件名写客户简称加年月，存进客户档案。去之前先看最近一张，判断这次要不要带备用交换机、带几根跳线，能省掉一趟白跑。要求只有一个：标签必须可读，拍虚了等于没拍。照片存两处，公司共享盘按客户建文件夹，工程师手机里只留最近一张备查。</p><h2>交接查三样，不是查文件在不在</h2><p>一查最近一张机柜照是否在三个月内；二查端口表标注的口与现场是否对得上，随机抽三个口实测——拔一根跳线看哪个区域掉线，不要求工程师读配置；三查密码条目能不能登录。三样过两样才算交接完成，没过的那一样写在交接单上，标明谁负责补。只发一个文件夹、里面十个 PDF，那不叫交接，叫把问题往后推一个月，等下一个人到现场再重新问一遍客户的行政。</p><h2>这套东西值多少钱</h2><p>按次收费的上门，一次四小时和一次四十分钟收的钱一样，差的是当天还能不能接第二单。一家客户一年按六次上门算，省下的三个多小时够多跑一家；十家客户就是十个半天。续费时你不需要解释服务好不好，把端口表和巡检照调出来给他看，这是唯一能摆上桌的凭据，也是同行拿不出的东西。报工时把查档案单独写成一行，客户看见你是带着东西来的，砍价的话就说不出口。</p>
+<ul class="wrong"><li>第二个工程师到场先问核心交换机在哪</li><li>端口表是三年前的，插的口早就换了</li><li>密码在上一任的微信收藏里</li><li>带错备件，白跑一趟</li><li>客户换网管，一切从零开始</li></ul>
+<div style="overflow-x:auto"><table border="1" cellspacing="0" cellpadding="9" style="border-collapse:collapse;width:100%;font-size:15px;margin:18px 0"><tr><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">档案项</th><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">记录频率</th><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">缺了会怎样</th></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">机柜正面照</td><td style="border:1px solid #e3d9c8;text-align:left;">每季度一次</td><td style="border:1px solid #e3d9c8;text-align:left;">带错备件，白跑一趟</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">端口占用表</td><td style="border:1px solid #e3d9c8;text-align:left;">每次改动当天</td><td style="border:1px solid #e3d9c8;text-align:left;">排查靠拔线试，客户断两次</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">出口链路</td><td style="border:1px solid #e3d9c8;text-align:left;">变更时</td><td style="border:1px solid #e3d9c8;text-align:left;">断网先怀疑宽带商，绕一小时</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">密码条目</td><td style="border:1px solid #e3d9c8;text-align:left;">每次变更</td><td style="border:1px solid #e3d9c8;text-align:left;">上门硬复位，一家停半天</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">上次故障结论</td><td style="border:1px solid #e3d9c8;text-align:left;">每次处理完</td><td style="border:1px solid #e3d9c8;text-align:left;">同类故障第三次仍从第一步查</td></tr></table></div>
+<h2>常见问题</h2><h3>客户不给拍照，说机房涉密，怎么办？</h3><p>改成只拍机柜、不拍屏幕和纸质文件，照片不出客户门，存在客户自己的共享盘里。仍然不同意的，退一步用端口表加一张手绘位置图代替，标注设备型号和位置序号。三种都做不到的客户，报价里要含一次现场勘察，别按普通工单报。</p><h3>老客户的拓扑谁来维护，工程师都不愿意写？</h3><p>把写档案变成上门流程的一步，不是额外任务：工单没填端口变更就算没完工，跟报销挂钩。变更当次只改三行字——第几个口、接哪个区域、什么时候改的。要求写一份完整文档一定拖，要求改三行当天就能改完。</p><h3>三十台电脑的客户也要画拓扑吗？</h3><p>要，但只画一页。三十台以内通常一台核心加两三台接入，一页纸足够。这类客户恰恰最需要，因为没专职网管，出问题时电话里说不清现场，全靠工程师回忆。一页纸的维护成本一年不到两小时。</p>
+
+<div class="cta">
+<b>你这边具体卡在哪一步</b>
+<p>说一句最乱的地方，我直接告诉你能不能做、从哪下手，不用加好友。</p>
+<button onclick="kbOpen()">直接问</button>
+</div>
+
+<div class="rel"><h3>接着看</h3><a href="/zhishi/wuye-shebei-dangan-cha-bu-dao-xinghao.html">物业设备档案怎么管</a><a href="/zhishi/laoyuangong-jingyan-zai-weixin-li.html">老员工经验只在微信里怎么留下来</a><a href="/zhishi/jianzhu-gongsi-laoyuangong-tuixiu-ziliao-jiaojie.html">建筑公司老员工退休资料交接</a><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/">回到首页</a></div>
+
+</div></main>
+<footer><div class="wrap">
+  <b>企业知识库搭建</b> · 西安<br>
+  服务范围：资料与经验整理、标准流程、模板库、索引规范。做成新人能自己查、换人不丢的东西。<br>
+  对话由 AI 先接待，具体的事本人接手。全站不发布任何客户名称与成交数据。
+</div></footer>
+<button id="kbBtn" onclick="kbOpen()"><i></i>问一句</button>
+<div id="kbPanel">
+  <div id="kbHead"><div>直接问，不用加好友<small>AI 先接待 · 具体的事本人接手</small></div><button id="kbClose" onclick="kbClose()">&times;</button></div>
+  <div id="kbBody"></div>
+  <div id="kbFoot"><textarea id="kbIn" placeholder="你那边资料现在是怎么存的？"></textarea><button id="kbSend" onclick="kbSay()">发</button></div>
+</div>
+<script src="/assets/chat.js"></script>
+</body>
+</html>
