@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>网站开发交付文档清单：七项缺一项不结尾款</title>
+<meta name="description" content="客户第二年找别人改，回头骂你代码烂，责任多在交付那天。这篇给七项交付清单：源码与数据库、部署手册、账号清单、第三方服务、域名证书到期日、接口人，逐项写清要写什么、少了会怎样，尾款怎么扣。">
+<link rel="canonical" href="https://jinyinhua2026.com.cn/zhishi/wangzhan-jiaofu-wendang-qingdan.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网站开发交付文档清单：七项缺一项不结尾款">
+<meta property="og:description" content="客户第二年找别人改，回头骂你代码烂，责任多在交付那天。这篇给七项交付清单：源码与数据库、部署手册、账号清单、第三方服务、域名证书到期日、接口人，逐项写清要写什么、少了会怎样，尾款怎么扣。">
+<meta property="og:url" content="https://jinyinhua2026.com.cn/zhishi/wangzhan-jiaofu-wendang-qingdan.html">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "第二年客户找别人改，回头骂你代码烂——问题出在交付那天", "description": "客户第二年找别人改，回头骂你代码烂，责任多在交付那天。这篇给七项交付清单：源码与数据库、部署手册、账号清单、第三方服务、域名证书到期日、接口人，逐项写清要写什么、少了会怎样，尾款怎么扣。", "author": {"@type": "Organization", "name": "企业知识库搭建"}, "publisher": {"@type": "Organization", "name": "企业知识库搭建"}}</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header><div class="hd">
+  <a href="/" class="logo">企业知识库搭建<span>把老师傅的经验，变成新人能查的东西</span></a>
+  <nav><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/zice.html">30 秒自测</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="kicker">实操</div>
+<h1>第二年客户找别人改，回头骂你代码烂——问题出在交付那天</h1>
+<p class="lead">交付只发一个压缩包，等于把解释成本留给下一个人。七项东西写齐，客户换人也不至于回头找你算账。</p>
+<h2>七项清单，缺一项扣尾款</h2><p>七项是：源码仓库含提交记录、数据库结构与初始化脚本、部署手册、账号清单、第三方服务清单（短信、支付、地图、存储）、域名与证书到期日、双方接口人。写在一张纸上，客户签字，缺一项扣尾款。最常被省掉的是第三方服务清单——客户换了服务商，短信通道还挂在你账号里，欠费停服，第一个电话还是打给你。</p><h2>交付当天做完三件事，别只发压缩包</h2><p>第一件，当着客户面部署一次，让他在自己电脑上把首页打开；第二件，把账号逐个登录一遍，密码当场改到他名下，不留在你手里；第三件，签一张交接单，写清交付日期、七项是否齐全、剩余待办。只发压缩包的交付，三个月后必然出问题：客户不知道哪个文件是配置，也不知道数据库在哪台机器上。</p><h2>部署手册只写三步，写多了没人看</h2><p>手册固定三段：装什么环境（版本号写死，不写「最新版」）、配置哪几个参数（文件路径与字段名）、启动后怎么验证（打开哪个地址、看到什么算成功）。三步之外不写原理。注释同理，只写「为什么这么改」，不写「这行做什么」——半年后接手的人看得懂语法，看不懂你当初为什么绕开那个坑。</p><h2>账号和域名归客户，到期日进日历</h2><p>服务器、域名、备案、证书、公众号与小程序后台，一律用客户自己的主体注册，你只做代管。实在要挂在你名下，就在合同附件写清归还条件。域名和证书到期日单独列一行，提前 30 天提醒一次，第 15 天再提醒一次。这不是技术问题，是第二年客户换人时你还在不在场的问题。</p><h2>一个六千的单，第二年能被收一万二</h2><p>情形是这样：客户第二年换服务商，对方接不上手，收了一万二的「代码梳理费」，客户回头找你算账。这笔钱本来不该发生。换个算法：交付做得清的项目，第二年续维护的概率高得多，维护费一年三千到八千，比一次性开发更稳。尾款留两到三成挂在交付验收上，是唯一能让七项真正落地的办法。</p>
+<ul class="wrong"><li>源码仓库带提交记录，不只给最终压缩包</li><li>数据库结构加初始化脚本，能一键重建</li><li>部署手册三步：环境版本、参数、验证地址</li><li>账号用客户主体注册，你只做代管</li><li>域名证书到期日提前 30 天、15 天各提醒一次</li><li>尾款留两到三成，挂在七项交付验收上</li></ul>
+<div style="overflow-x:auto"><table border="1" cellspacing="0" cellpadding="9" style="border-collapse:collapse;width:100%;font-size:15px;margin:18px 0"><tr><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">交付项</th><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">写清什么</th><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">少了会怎样</th></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">源码与数据库</td><td style="border:1px solid #e3d9c8;text-align:left;">仓库地址、提交记录、初始化脚本</td><td style="border:1px solid #e3d9c8;text-align:left;">接手人重建不出环境，只能全量重写</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">部署手册</td><td style="border:1px solid #e3d9c8;text-align:left;">环境版本、参数文件、验证地址</td><td style="border:1px solid #e3d9c8;text-align:left;">每次重启都要打电话问你</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">账号清单</td><td style="border:1px solid #e3d9c8;text-align:left;">服务器、后台、第三方服务、绑定手机号</td><td style="border:1px solid #e3d9c8;text-align:left;">客户换人，短信通道还在你账号里欠费</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">域名与证书</td><td style="border:1px solid #e3d9c8;text-align:left;">注册主体、到期日、续费责任人</td><td style="border:1px solid #e3d9c8;text-align:left;">到期当天网站打不开，客户先骂你</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">接口人</td><td style="border:1px solid #e3d9c8;text-align:left;">双方各一名，含电话与响应时间</td><td style="border:1px solid #e3d9c8;text-align:left;">出问题找不到人，小事拖成事故</td></tr></table></div>
+<h2>常见问题</h2><h3>客户说不要交付文档，能省点钱吗？</h3><p>可以省，但要写进合同：交付范围不含文档，后续任何接手、迁移、排查按小时另计，一小时两百到四百。多数客户听到这句会改口。真正的风险不是他不要，是他以为付了钱就该有——把「给什么」写清楚，比多给两页纸有用。</p><h3>源码都给了客户，会不会被同行抄走？</h3><p>普通企业站和小程序，代码本身不值钱，值钱的是你的理解和后面的维护。真怕抄，就在合同里约定授权范围：仅限本项目使用、不得转售，并把第三方账号与配置留在自己手里。靠扣源码留客户留不住，只会让下一次合作谈崩。</p><h3>交付文档要写多细才算够？</h3><p>一条标准：换一个没参与过这个项目的人，只拿文档，能不能在两小时内把站点跑起来。能，就够了；不能，缺的就是那一项。别追求文档漂亮，追求「照做能起来」。写完让同事试一次，卡在哪补哪，通常两小时能补齐。</p>
+
+<div class="cta">
+<b>你这边具体卡在哪一步</b>
+<p>说一句最乱的地方，我直接告诉你能不能做、从哪下手，不用加好友。</p>
+<button onclick="kbOpen()">直接问</button>
+</div>
+
+<div class="rel"><h3>接着看</h3><a href="/zhishi/wangzhan-kaifa-xuqiu-biangeng-liuhen.html">网站开发 需求变更 怎么留痕</a><a href="/zhishi/it-yunwei-kehu-wangluo-topo-dangan.html">IT运维 客户网络拓扑 档案</a><a href="/zhishi/laoyuangong-jingyan-zai-weixin-li.html">老员工经验只在微信里怎么留下来</a><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/">回到首页</a></div>
+
+</div></main>
+<footer><div class="wrap">
+  <b>企业知识库搭建</b> · 西安<br>
+  服务范围：资料与经验整理、标准流程、模板库、索引规范。做成新人能自己查、换人不丢的东西。<br>
+  对话由 AI 先接待，具体的事本人接手。全站不发布任何客户名称与成交数据。
+</div></footer>
+<button id="kbBtn" onclick="kbOpen()"><i></i>问一句</button>
+<div id="kbPanel">
+  <div id="kbHead"><div>直接问，不用加好友<small>AI 先接待 · 具体的事本人接手</small></div><button id="kbClose" onclick="kbClose()">&times;</button></div>
+  <div id="kbBody"></div>
+  <div id="kbFoot"><textarea id="kbIn" placeholder="你那边资料现在是怎么存的？"></textarea><button id="kbSend" onclick="kbSay()">发</button></div>
+</div>
+<script src="/assets/chat.js"></script>
+</body>
+</html>
