@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IT运维接手同行客户：137 个域账号，40 个是离职的</title>
+<meta name="description" content="接手一家 60 人的客户，第一件事不是改密码，是把账号导出来按四类分。这篇给出四类的判定依据、三类高危账号的处置顺序、交接单要签的两样东西，以及批量改密为什么会导致停机。">
+<link rel="canonical" href="https://jinyinhua2026.com.cn/zhishi/it-yunwei-jieshou-kehu-zhanghao-quanxian.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IT运维接手同行客户：137 个域账号，40 个是离职的">
+<meta property="og:description" content="接手一家 60 人的客户，第一件事不是改密码，是把账号导出来按四类分。这篇给出四类的判定依据、三类高危账号的处置顺序、交接单要签的两样东西，以及批量改密为什么会导致停机。">
+<meta property="og:url" content="https://jinyinhua2026.com.cn/zhishi/it-yunwei-jieshou-kehu-zhanghao-quanxian.html">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "接手第一件事不是改密码，是把账号清单导出来按四类分", "description": "接手一家 60 人的客户，第一件事不是改密码，是把账号导出来按四类分。这篇给出四类的判定依据、三类高危账号的处置顺序、交接单要签的两样东西，以及批量改密为什么会导致停机。", "author": {"@type": "Organization", "name": "企业知识库搭建"}, "publisher": {"@type": "Organization", "name": "企业知识库搭建"}}</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header><div class="hd">
+  <a href="/" class="logo">企业知识库搭建<span>把老师傅的经验，变成新人能查的东西</span></a>
+  <nav><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/zice.html">30 秒自测</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="kicker">实操</div>
+<h1>接手第一件事不是改密码，是把账号清单导出来按四类分</h1>
+<p class="lead">60 人的公司，域账号 137 个，其中 40 个属于已离职员工，11 个近 30 天还在正常登录。</p>
+<h2>为什么先导清单再改密</h2><p>情形是这样：接手一家 60 人的客户，导出域账号 137 个，在职 78、离职 40、外包 12、系统服务 7，其中 11 个离职账号近 30 天还有登录记录。这时候先批量改密，会把备份、监控、ERP 接口的服务账号一起改死，停机半天赔出去的钱，比泄露风险更直接。</p><h2>四类怎么分</h2><p>在职对人，用当月工资表或社保名单核；离职只禁用不删除，日志要能和离职日期对上；外包移进单独的组织单位，备注写合同到期日；系统服务账号改密前先翻配置文件，一处漏改就断一个系统。四类分开，处置动作才不会互相打架。分类先在表格里做，一列一个类别，标完了再回系统批量操作，边分边改最容易把还在用的账号停错。</p><h2>先处理三类高危</h2><p>第一类，离职仍在登录的 11 个：禁用，同时查登录日志的来源 IP，判断是本人还是设备残留。第二类，共享账号（admin、finance 这类）：改为一人一号，共用账号出了事查不到人。第三类，域管权限：从 9 个压到 3 个，其余降为普通用户，按岗位给不按资历给。</p><h2>交接单要签两样</h2><p>一是账号清单，137 行四列：账号、归属人、类别、处置；二是前服务商交付确认，含设备清单、密码库移交、未结工单三项。前服务商不签，就在交接单上写「清单由我方导出，未经前服务商确认」，把责任边界划清，后面出事才有据可依。两份各存一份，客户一份、你一份，扫描件进项目档案，客户换对接人时不用重新讲一遍来龙去脉。</p><h2>这份清单为什么值钱</h2><p>一个 60 人客户的年服务费通常三万到六万；一次离职账号被登录导致的数据事故，赔偿加口碑损失超过一年服务费。清单成本两小时，导出一遍、分四类、标处置。买的是接手第二周就能给客户一份他自己看得懂的账号现状，而不是一句「都处理好了」。清单还能复用：每季度重导一次和上一版比差异，新增账号、权限升级、离职未禁用，三种变化一眼看出来。</p>
+<ul class="wrong"><li>先导清单再改密，顺序不能反</li><li>账号分四类：在职、离职、外包、系统服务</li><li>离职账号只禁用不删，日志要对得上</li><li>系统服务账号改密前先查配置文件</li><li>共享账号改一人一号，域管压到 3 个</li><li>前服务商不签，就写明清单来源</li></ul>
+<div style="overflow-x:auto"><table border="1" cellspacing="0" cellpadding="9" style="border-collapse:collapse;width:100%;font-size:15px;margin:18px 0"><tr><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">账号类别</th><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">处置动作</th><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">判定依据</th></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">在职</td><td style="border:1px solid #e3d9c8;text-align:left;">保留，逐人核对名单</td><td style="border:1px solid #e3d9c8;text-align:left;">当月工资表或社保名单</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">离职</td><td style="border:1px solid #e3d9c8;text-align:left;">禁用不删除，记录保留 180 天</td><td style="border:1px solid #e3d9c8;text-align:left;">离职日期加登录日志</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">外包</td><td style="border:1px solid #e3d9c8;text-align:left;">移入单独组织单位，写到期日</td><td style="border:1px solid #e3d9c8;text-align:left;">合同服务期</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">系统服务</td><td style="border:1px solid #e3d9c8;text-align:left;">改密前先查配置文件</td><td style="border:1px solid #e3d9c8;text-align:left;">备份、监控、接口清单</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">域管权限</td><td style="border:1px solid #e3d9c8;text-align:left;">压到 3 个以内</td><td style="border:1px solid #e3d9c8;text-align:left;">岗位职责，不按资历</td></tr></table></div>
+<h2>常见问题</h2><h3>客户不肯给员工名单怎么办？</h3><p>用替代口径：近 3 个月有登录的算在用，其余先禁用，让客户自己认领，认领期给 5 个工作日，过期未认领的转归档。这样判断责任回到客户侧，你交付的是「按规则处理过的清单」，不是猜测。</p><h3>前服务商不配合交接怎么办？</h3><p>不接受口头交接。发一封书面交接函，列五项：设备清单、账号清单、密码库、未结工单、到期服务，抄送客户；同时把现有设备拍照存档。缺项在你的报告里写清楚，后续出问题有据可依。</p><h3>密码要不要一次性全部换掉？</h3><p>分层换。域管和防火墙当周换，普通用户随下次登录强制修改，系统服务账号排在维护窗口内。一次性全换最容易把备份和监控改断，而这两样断了，客户当天就知道，第二天就会质疑你的专业度。</p>
+
+<div class="cta">
+<b>你这边具体卡在哪一步</b>
+<p>说一句最乱的地方，我直接告诉你能不能做、从哪下手，不用加好友。</p>
+<button onclick="kbOpen()">直接问</button>
+</div>
+
+<div class="rel"><h3>接着看</h3><a href="/zhishi/it-yunwei-kehu-wangluo-topo-dangan.html">IT运维 客户网络拓扑 档案</a><a href="/zhishi/it-yunwei-shangmenfei-gongshi-zenme-suan.html">IT运维 上门费 怎么算</a><a href="/wenda/yuangong-lizhi-jiaojie.html">员工离职，工作交接怎么做才不留坑？</a><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/">回到首页</a></div>
+
+</div></main>
+<footer><div class="wrap">
+  <b>企业知识库搭建</b> · 西安<br>
+  服务范围：资料与经验整理、标准流程、模板库、索引规范。做成新人能自己查、换人不丢的东西。<br>
+  对话由 AI 先接待，具体的事本人接手。全站不发布任何客户名称与成交数据。
+</div></footer>
+<button id="kbBtn" onclick="kbOpen()"><i></i>问一句</button>
+<div id="kbPanel">
+  <div id="kbHead"><div>直接问，不用加好友<small>AI 先接待 · 具体的事本人接手</small></div><button id="kbClose" onclick="kbClose()">&times;</button></div>
+  <div id="kbBody"></div>
+  <div id="kbFoot"><textarea id="kbIn" placeholder="你那边资料现在是怎么存的？"></textarea><button id="kbSend" onclick="kbSay()">发</button></div>
+</div>
+<script src="/assets/chat.js"></script>
+</body>
+</html>
