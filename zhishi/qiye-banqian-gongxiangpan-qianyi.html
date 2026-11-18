@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>公司搬迁共享盘迁移：目录一改名，全员重学找文件</title>
+<meta name="description" content="新址换了运营商，服务器 IP 一变，所有映射失效，员工以为资料全没了。这篇给迁移四步顺序、域名代替 IP 的写法、权限按组复制的判据，以及旧路径到新路径的对照表。">
+<link rel="canonical" href="https://jinyinhua2026.com.cn/zhishi/qiye-banqian-gongxiangpan-qianyi.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="公司搬迁共享盘迁移：目录一改名，全员重学找文件">
+<meta property="og:description" content="新址换了运营商，服务器 IP 一变，所有映射失效，员工以为资料全没了。这篇给迁移四步顺序、域名代替 IP 的写法、权限按组复制的判据，以及旧路径到新路径的对照表。">
+<meta property="og:url" content="https://jinyinhua2026.com.cn/zhishi/qiye-banqian-gongxiangpan-qianyi.html">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "搬完第一天全公司打不开共享盘，以为三年的资料丢了", "description": "新址换了运营商，服务器 IP 一变，所有映射失效，员工以为资料全没了。这篇给迁移四步顺序、域名代替 IP 的写法、权限按组复制的判据，以及旧路径到新路径的对照表。", "author": {"@type": "Organization", "name": "企业知识库搭建"}, "publisher": {"@type": "Organization", "name": "企业知识库搭建"}}</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header><div class="hd">
+  <a href="/" class="logo">企业知识库搭建<span>把老师傅的经验，变成新人能查的东西</span></a>
+  <nav><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/zice.html">30 秒自测</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="kicker">实操</div>
+<h1>搬完第一天全公司打不开共享盘，以为三年的资料丢了</h1>
+<p class="lead">某项目的情形：周五搬完，周一上班，五十台电脑的共享盘全部显示「无法访问」。服务器好好的，是 IP 从内网某段换成了另一段，桌面上那些指向 IP 的快捷方式全部失效。<br>当天上午没人干活，IT 被围着问了三十多次「我的项目文件夹去哪了」。</p>
+<h2>顺序错了才出这种事：先定地址，再搬机器</h2><p>正确顺序是网络先通、机器后搬。搬前十四天确认新址宽带与固定内网地址段，把服务器先在新址通电跑通一遍，再安排物理搬迁；搬前三天导出一份旧服务器的用户组与权限清单，留作比对底稿。<br>地址一定会变的时候，唯一稳妥的办法是把客户端全部改成认域名不认数字：内网建一条域名解析，把共享盘地址写成一个固定名字，服务器换到哪个地址，只改解析记录一处。硬规则：所有映射脚本、快捷方式、桌面说明文档里，不许出现数字地址。</p><h2>搬迁期冻结目录结构，只换前缀不改名</h2><p>搬迁不是整理的最佳时机，这一条必须先说服老板。目录改名、层级合并看起来更整齐，代价是所有人半年的肌肉记忆清零，之后一个月天天有人在群里问东西放哪了。<br>做法：结构冻结，路径只做前缀替换，新服务器上的目录名一个都不动。真要整理，等搬完三个月单独立项做，那时才有精力做迁移通知和培训。搬迁窗口里既搬又整，两件事都会做坏。</p><h2>权限按原组复制，人跟组走，别在窗口期重设</h2><p>最常见的错误是新服务器上重建账号，顺手按「现在谁该看什么」重新授权，结果是项目部看不到自己三年前的项目，财务看不到上季度凭证。<br>做法：拿搬前导出的用户组清单，按组复制权限，人员只做加组减组，不动目录上的授权。离职账号单独列一张表，搬完一个月再删，不要在搬迁窗口里删——窗口期删账号，一旦发现删错，恢复权限比恢复数据更麻烦。判据：新服务器权限清单与旧清单逐行比对，差异超过百分之五，必须逐条写明原因，否则先按原样全量复制。</p><h2>旧地址保留九十天只读，并出一张路径对照表</h2><p>迁移完成后旧服务器不立即下线，保留九十天只读，两套地址并存。同时出一张对照表，两列：旧路径、新路径，按一级目录列，不超过三十行，发到全员群并打印贴在新址茶水间。<br>判断标准用问路次数：搬后第二周统计「问 IT 找不到文件」的次数，每天超过三次，说明对照表没发到位或有人动过结构；低于一次，第二周就可以把旧机下线的通知发出去。九十天到期下线，另发一张「迁移完成」通告，写清新路径唯一有效。</p><h2>为什么这笔钱必须花在 IT 上</h2><p>算账：五十人公司的共享盘迁移，专业实施通常一到两天人工，费用在一两千到五六千的量级，取决于服务器数量与是否需要重建域。搞砸的代价是全员平均两到五天找不到文件，按五十人乘三天算，等于一百五十个工作日，远超实施费。<br>买单的人有三个：行政（管搬迁总协调）、IT（出事背锅的）、老板（他要的是搬完当天能开工）。搬迁窗口里 IT 最容易被当成搬箱子的，实际它是唯一能让「搬完就开工」成立的一环。</p>
+<ul class="wrong"><li>搬前 14 天定地址，搬前 3 天导权限清单</li><li>客户端只认域名不认数字，解析改一处即可</li><li>搬迁期冻结目录结构，只换路径前缀</li><li>权限按原用户组复制，人员只加减组</li><li>离职账号列清单，搬完一个月再删</li><li>旧机保留 90 天只读，出一张旧新路径对照表</li></ul>
+<div style="overflow-x:auto"><table border="1" cellspacing="0" cellpadding="9" style="border-collapse:collapse;width:100%;font-size:15px;margin:18px 0"><tr><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">时间点</th><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">做什么</th><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">判据</th></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">搬前 14 天</td><td style="border:1px solid #e3d9c8;text-align:left;">定新址地址段与内网域名</td><td style="border:1px solid #e3d9c8;text-align:left;">客户端配置里没有数字地址</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">搬前 3 天</td><td style="border:1px solid #e3d9c8;text-align:left;">导出用户组与权限清单</td><td style="border:1px solid #e3d9c8;text-align:left;">搬后比对差异低于 5%</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">搬迁日</td><td style="border:1px solid #e3d9c8;text-align:left;">结构冻结，只换路径前缀</td><td style="border:1px solid #e3d9c8;text-align:left;">一级目录数量与名称不变</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">搬后 2 周</td><td style="border:1px solid #e3d9c8;text-align:left;">发对照表，统计问路次数</td><td style="border:1px solid #e3d9c8;text-align:left;">每天问路不超过 3 次</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">搬后 90 天</td><td style="border:1px solid #e3d9c8;text-align:left;">旧机下线，发迁移完成通告</td><td style="border:1px solid #e3d9c8;text-align:left;">旧路径返回明确提示，不静默失败</td></tr></table></div>
+<h2>常见问题</h2><h3>公司没有固定公网地址，能不能直接换成网盘？</h3><p>可以，但要先分堆：共享盘按目录分成「要共享的」和「要留痕的」，共享堆上传网盘并保留原目录名，留痕堆留本地或冷备。五十人公司全量上云常在几百 GB 到几 TB，年费与带宽要重算，大文件（图纸、视频素材）打开速度会明显下降，搬迁前先实测。</p><h3>服务器能不能跟办公桌椅一车搬？</h3><p>不能。服务器应最后断电、单独装车、单独押运，到新址最先上架通电。震动、堆压和温差是硬盘故障的三个主因，和桌椅混装是拿三年的资料赌一次运输。搬迁前一周做一次完整备份并异地存放，这份备份在搬迁当天不要放在同一辆车上。</p><h3>员工说新盘里少了文件夹，怎么判断是丢了还是看不见？</h3><p>三步查。第一步比对一级目录清单，清单在就是结构没丢；第二步用管理员账号登进去看该目录权限，多数「少了」是没权限看不见；第三步才按旧路径对照表逐级进入，能进到第三级说明只是入口变了。三步都过不去，再查备份与搬迁当天的装卸记录。</p>
+
+<div class="cta">
+<b>你这边具体卡在哪一步</b>
+<p>说一句最乱的地方，我直接告诉你能不能做、从哪下手，不用加好友。</p>
+<button onclick="kbOpen()">直接问</button>
+</div>
+
+<div class="rel"><h3>接着看</h3><a href="/zhishi/it-yunwei-kehu-wangluo-topo-dangan.html">IT运维 客户网络拓扑 档案</a><a href="/zhishi/it-yunwei-jieshou-kehu-zhanghao-quanxian.html">IT运维 接手客户 账号权限 梳理</a><a href="/zhishi/qiye-banqian-ziliao-dabao-qingdan.html">企业搬迁 资料打包 清单</a><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/">回到首页</a></div>
+
+</div></main>
+<footer><div class="wrap">
+  <b>企业知识库搭建</b> · 西安<br>
+  服务范围：资料与经验整理、标准流程、模板库、索引规范。做成新人能自己查、换人不丢的东西。<br>
+  对话由 AI 先接待，具体的事本人接手。全站不发布任何客户名称与成交数据。
+</div></footer>
+<button id="kbBtn" onclick="kbOpen()"><i></i>问一句</button>
+<div id="kbPanel">
+  <div id="kbHead"><div>直接问，不用加好友<small>AI 先接待 · 具体的事本人接手</small></div><button id="kbClose" onclick="kbClose()">&times;</button></div>
+  <div id="kbBody"></div>
+  <div id="kbFoot"><textarea id="kbIn" placeholder="你那边资料现在是怎么存的？"></textarea><button id="kbSend" onclick="kbSay()">发</button></div>
+</div>
+<script src="/assets/chat.js"></script>
+</body>
+</html>
