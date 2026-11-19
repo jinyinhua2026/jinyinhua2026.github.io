@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>食材配送品名规格不统一：一物一码怎么编</title>
+<meta name="description" content="客户叫法、厂家叫法、仓内叫法三套并行，是新人和老手最大的分歧点：同一件货三个名字，拣错一箱差三四十块。这篇给出内部编码的三段结构、客户叫法对照表怎么维护，以及两周内把在库 SKU 清一遍的顺序。">
+<link rel="canonical" href="https://jinyinhua2026.com.cn/zhishi/shicai-peisong-pinming-guige-bu-tongyi.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="食材配送品名规格不统一：一物一码怎么编">
+<meta property="og:description" content="客户叫法、厂家叫法、仓内叫法三套并行，是新人和老手最大的分歧点：同一件货三个名字，拣错一箱差三四十块。这篇给出内部编码的三段结构、客户叫法对照表怎么维护，以及两周内把在库 SKU 清一遍的顺序。">
+<meta property="og:url" content="https://jinyinhua2026.com.cn/zhishi/shicai-peisong-pinming-guige-bu-tongyi.html">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "同一包冻品三个叫法，拣货靠老师傅认包装，新人第一天就拣错", "description": "客户叫法、厂家叫法、仓内叫法三套并行，是新人和老手最大的分歧点：同一件货三个名字，拣错一箱差三四十块。这篇给出内部编码的三段结构、客户叫法对照表怎么维护，以及两周内把在库 SKU 清一遍的顺序。", "author": {"@type": "Organization", "name": "企业知识库搭建"}, "publisher": {"@type": "Organization", "name": "企业知识库搭建"}}</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header><div class="hd">
+  <a href="/" class="logo">企业知识库搭建<span>把老师傅的经验，变成新人能查的东西</span></a>
+  <nav><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/zice.html">30 秒自测</a></nav>
+</div></header>
+<main><div class="wrap">
+
+<div class="kicker">实操</div>
+<h1>同一包冻品三个叫法，拣货靠老师傅认包装，新人第一天就拣错</h1>
+<p class="lead">客户单子上写「鸡中翅」，仓里 2L、3L、A 级三种包装都叫这个名字。<br>拣错一箱不是赔一箱的钱，是整条线当天的出餐计划全乱。</p>
+<h2>先对齐三种叫法：客户、厂家、仓内</h2><p>客户下单写「鸡中翅（大）」，厂家箱子上印「冷冻鸡中翅 2L 10kg」，仓里老师傅管它叫「大翅」。三种叫法指同一件货，新人看到单子上一个「大」字就去拿 A 级箱，一箱差三四十块。别急着建系统，先把「谁说、说什么、指哪一箱」写在同一张纸上，这一步一天能做完，也比任何编码规则都靠前。</p><h2>内部编码只做三段：品类、规格、包装</h2><p>会变的东西一律不进编码：价格会调、供应商会换、批次会过，写进去就等于每次变动都要重编。三段足够用——品类两位（鸡副、牛副、蔬菜、冻品），规格两位（2L、3L、A 级），包装两位（箱、包、件），例如 SP-23-01 表示鸡副 2L 箱装。其余信息放属性字段，编码只负责一件事：让人一眼认出是哪一箱。</p><h2>客户叫法单独一张对照表，业务员口头用</h2><p>不要指望客户按你的编码下单，也不该要求他们改口。做一张两列对照表：左列客户原话，右列内部编码，一个客户一张，附在合同后面。业务员接单时只看客户那张表，仓里打单只打内部码。客户临时改口了就改表，不改编码——这一条决定了这套东西能用三年还是三个月。表由接单的业务员维护，谁新增客户品类谁加行。</p><h2>打单、拣货、盘点只认内部码</h2><p>单据上出现商品名就是隐患。拣货单只印内部码、规格、数量、货位，不印客户那套叫法；新人认不出货不要紧，认出货位就行。清库也别贪多：拉最近三个月的出库明细，按频次排序，前 80% 的动销品先编码，长尾品挂待编标记照常出库，两周一轮，三轮基本覆盖。盘点同样按内部码走，月底的差异才能和拣货、打单对上。</p><h2>为什么值这个钱</h2><p>拣错一箱冻品，赔的通常不止一箱：客户当天的出餐计划要改，退换运费、门店临时采购的差价，往往是一箱货值的三到五倍。按每天两千箱出库、千分之三错拣率算，一个月错六箱，赔付大致等于把在库 SKU 编完一遍的人工。老板愿意为它付钱，不是因为它能多卖货，是因为它把一笔看不见的赔款变成了能查的数。</p>
+<ul class="wrong"><li>按客户叫法建编码，客户一改口全仓返工</li><li>编码里塞价格和供应商，调价就得重编</li><li>只做对照表不改打单格式，新人根本不看</li><li>一次编完十年 SKU，编到一半停下更乱</li><li>编码不带货位，拣货还是靠老师傅认箱子</li></ul>
+<div style="overflow-x:auto"><table border="1" cellspacing="0" cellpadding="9" style="border-collapse:collapse;width:100%;font-size:15px;margin:18px 0"><tr><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">叫法来源</th><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">典型写法</th><th style="border:1px solid #e3d9c8;text-align:left;background:#faf6ee;font-weight:700">单据上怎么用</th></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">客户叫法</td><td style="border:1px solid #e3d9c8;text-align:left;">鸡中翅（大）</td><td style="border:1px solid #e3d9c8;text-align:left;">只出现在合同与对账口径</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">厂家叫法</td><td style="border:1px solid #e3d9c8;text-align:left;">冷冻鸡中翅 2L 10kg</td><td style="border:1px solid #e3d9c8;text-align:left;">进货验收时核对箱唛</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">仓内编码</td><td style="border:1px solid #e3d9c8;text-align:left;">SP-23-01</td><td style="border:1px solid #e3d9c8;text-align:left;">打单、拣货、盘点一律用它</td></tr><tr><td style="border:1px solid #e3d9c8;text-align:left;">规格换算</td><td style="border:1px solid #e3d9c8;text-align:left;">1 箱=2 包=10kg</td><td style="border:1px solid #e3d9c8;text-align:left;">拆包另立加工项计价</td></tr></table></div>
+<h2>常见问题</h2><h3>我们已经在用厂家的条码，还要自建编码吗？</h3><p>要。厂家条码按厂家自己的产品线编，同一个品类换个供应商就换一套码，仓里没法横向比、也没法合并报表。内部编码只服务你自己的拣货、盘点和报价，与厂家码并存：验收时扫厂家码，出库时用内部码，两者在对照表里挂上关系即可。</p><h3>客户坚持按他的叫法下单，怎么落地？</h3><p>不用改客户。给每个客户做一张专属对照表，附在合同里，业务员接单时照着表转成内部码，转错由业务员负责。表随客户走，客户新增品类就在表上追加一行，编码不动。客户体验没变，仓里的口径统一了。</p><h3>编码编好后业务员还是写错，问题在哪？</h3><p>多半是打单界面上还留着手工填品名的空格。只要那个空格在，人就会图省事手写。把品名输入框去掉，改成选编码、自动带出货位和规格，写错的空间就没了。规则改不了习惯，界面能。</p>
+
+<div class="cta">
+<b>你这边具体卡在哪一步</b>
+<p>说一句最乱的地方，我直接告诉你能不能做、从哪下手，不用加好友。</p>
+<button onclick="kbOpen()">直接问</button>
+</div>
+
+<div class="rel"><h3>接着看</h3><a href="/zhishi/canyin-liannuo-xinpin-shangxin-peifangka.html">餐饮连锁 新品 配方卡 门店执行</a><a href="/zhishi/shicai-peisong-songhuodan-qianshou-duibushang.html">食材配送 送货单 签收 对不上</a><a href="/zhishi/shicai-chaibao-jiagong-zenme-jijia.html">食材 拆包 加工 怎么计价</a><a href="/hangye/">按行业看</a><a href="/wenda/">常见问题</a><a href="/">回到首页</a></div>
+
+</div></main>
+<footer><div class="wrap">
+  <b>企业知识库搭建</b> · 西安<br>
+  服务范围：资料与经验整理、标准流程、模板库、索引规范。做成新人能自己查、换人不丢的东西。<br>
+  对话由 AI 先接待，具体的事本人接手。全站不发布任何客户名称与成交数据。
+</div></footer>
+<button id="kbBtn" onclick="kbOpen()"><i></i>问一句</button>
+<div id="kbPanel">
+  <div id="kbHead"><div>直接问，不用加好友<small>AI 先接待 · 具体的事本人接手</small></div><button id="kbClose" onclick="kbClose()">&times;</button></div>
+  <div id="kbBody"></div>
+  <div id="kbFoot"><textarea id="kbIn" placeholder="你那边资料现在是怎么存的？"></textarea><button id="kbSend" onclick="kbSay()">发</button></div>
+</div>
+<script src="/assets/chat.js"></script>
+</body>
+</html>
